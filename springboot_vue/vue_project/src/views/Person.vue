@@ -43,6 +43,7 @@ const handleFileSuccess = (res) => {
   data.user.avatar = res.data
 
 }
+const emit = defineEmits(['updateUser'])
 const update = () => {
   let url
   if("ADMIN" === data.user.role){
@@ -56,6 +57,7 @@ const update = () => {
       ElMessage.success("信息修改成功")
       console.log(data.user)
       localStorage.setItem('code_user', JSON.stringify(data.user))
+      emit("updateUser")
     }
   })
 }

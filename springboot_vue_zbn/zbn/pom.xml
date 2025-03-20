@@ -42,6 +42,7 @@
             <version>5.8.25</version>
         </dependency>
 
+
         <!-- 添加jwt用来对发送的token加密-->
         <dependency>
             <groupId>com.auth0</groupId>
@@ -101,13 +102,20 @@
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.project lombok</groupId>
+                            <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.zbn.ZbnApplication</mainClass>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

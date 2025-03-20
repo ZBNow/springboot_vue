@@ -15,6 +15,9 @@ const router = createRouter({
         { path: 'admin', meta:{name: '管理员信息'}, component: () => import('../views/admin.vue')},
         { path: 'user', meta:{name: '用户信息'}, component: () => import('../views/user.vue')},
         { path: 'person', meta:{name: '个人中心'}, component: () => import('../views/Person.vue')},
+        { path: 'UpdatePassword', meta:{name: '修改密码'}, component: () => import('../views/UpdatePassword.vue')},
+        { path: 'notice', meta:{name: '系统公告'}, component: () => import('../views/Notice.vue')},
+
 
       ]
     }

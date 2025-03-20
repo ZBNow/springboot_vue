@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.zbn.entity.Admin;
 import java.util.HashMap;
+import org.slf4j.Logger;
 //接收前端发来的请求的接口
 @RestController
 public class WebController {
@@ -39,5 +40,14 @@ public class WebController {
         userService.add(user);
         return Result.success();
     }
+    @PostMapping("/updatePassword")
+    public Result updatePassword(@RequestBody Account account) {
+        if("ADMIN".equals(account.getRole())) {
+            adminService.updatePassword(account);
 
+        } else {
+            userService.updatePassword(account);
+        }
+        return Result.success();
+    }
 }

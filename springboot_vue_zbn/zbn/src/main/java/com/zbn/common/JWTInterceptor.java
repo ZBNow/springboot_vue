@@ -38,6 +38,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         }
         Account account = null;
         try{
+            //开始解码操作
             String audience = JWT.decode(token).getAudience().get(0);
             String[] split = audience.split("-");
             String userId = split[0];

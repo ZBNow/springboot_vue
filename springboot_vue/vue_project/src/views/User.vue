@@ -5,7 +5,6 @@
     <el-input clearable @clear="load" style="width: 240px" v-model="data.name" placeholder="请输入name查询" :prefix-icon="Search"></el-input>
     <el-button type="primary" style="margin-left: 5px" @click="load">查 询</el-button>
     <el-button type="info" style="margin-left: 5px" @click="reset">重 置</el-button>
-
   </div>
 
   <div class="card" style="margin-bottom: 5px">
@@ -108,8 +107,8 @@ const data = reactive({
   tableData: [],
   formVisible: false,
   form: {},
-  //rules验证规则
   rows: [], // 存储批量选择的数据
+  //rules验证规则
   rules: {
     username: [
       {required: true, message: "请输入账号", trigger: 'blur'}
@@ -226,13 +225,14 @@ const deleteBatch = () => {
     })
   }).catch(err =>{
   })
-
 }
+
 const exportData = () => {
   let url = `http://localhost:9999/user/export?username=${data.username}&name=${data.name}`
   console.log(data.username,data.name)
   window.open(url)
 }
+
 const handleImport = (res) => {
   if(res.code === '200'){
     ElMessage.success('批量导入成功')
@@ -241,6 +241,7 @@ const handleImport = (res) => {
     ElMessage.error(res.msg)
   }
 }
+
 const handleFileSuccess = (res) =>{
   data.form.avatar = res.data
 }

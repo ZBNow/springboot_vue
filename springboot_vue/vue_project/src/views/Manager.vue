@@ -16,34 +16,40 @@
             <div style="width: fit-content; display: flex; align-items: center; border-bottom: 1px solid #b1adad; padding-right: 20px">
                 <el-dropdown>
                     <div style="display: flex; align-items: center;">
-                      <img v-if="data.user?.avatar" :src="data.user?.avatar" style="width: 40px; border-radius: 50%;"/>
-                      <img v-else style="width: 40px; border-radius: 50%;"  src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
+                      <img v-if="data.user?.avatar" :src="data.user?.avatar" style="width: 40px;height: 40px; border-radius: 50%;"/>
+                      <img v-else style="width: 40px; height: 40px;border-radius: 50%;"  src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
                       <span style="margin-left: 5px;">{{ data.user?.name }}</span>
                     </div>
                     <template #dropdown>
                         <el-dropdown-menu>
                             <el-dropdown-item @click="router.push('/manager/person')">个人信息</el-dropdown-item>
-                            <el-dropdown-item>修改密码</el-dropdown-item>
+                            <el-dropdown-item @click="router.push('/manager/updatePassword')">修改密码</el-dropdown-item>
                             <el-dropdown-item @click="logout">退出登入</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
 
                 </el-dropdown>
-                
+
             </div>
         </div>
         <!-- 主体内容区域 -->
         <div style="display: flex;">
             <!-- 侧边菜单 -->
             <div style="width: 240px;">
-                <el-menu router :default-active="router.currentRoute.value.path" :default-openeds="['1']" style="min-height: calc(100vh - 60px);">
+                <el-menu router :default-active="router.currentRoute.value.path" :default-openeds="['1','2']" style="min-height: calc(100vh - 60px);">
                     
                     <el-menu-item index="/manager/home">
                         <el-icon><House /></el-icon>
                         <span>首页</span>
                     </el-menu-item>
-
-                    <el-sub-menu index="1">
+                  <el-sub-menu index="1">
+                    <template #title>
+                      <el-icon><Message /></el-icon>
+                      <span>信息管理</span>
+                    </template>
+                    <el-menu-item index="/manager/notice">系统公告</el-menu-item>
+                  </el-sub-menu>
+                    <el-sub-menu index="2"  v-if="data.user.role === 'ADMIN'">
                         <template #title>
                             <el-icon><Location /></el-icon>
                             <span>用户管理</span>
@@ -57,14 +63,14 @@
 
             <!-- 数据渲染区域 -->
             <div style="flex: 1; width: 0; padding:10px; background-color: #f2f4ff;">
-                <RouterView/>
+                <RouterView @updateUser="updateUser"/>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { House, Location } from '@element-plus/icons-vue'
+import {House, Location, Message} from '@element-plus/icons-vue'
 import router from "../router/index.js";
 import { reactive } from "vue";
 
@@ -84,6 +90,9 @@ if(userStr){
   }
 } else {
   location.href = '/login'
+}
+const updateUser = () => {
+  data.user = JSON.parse(localStorage.getItem('code_user') || '{}')
 }
 
 </script>
