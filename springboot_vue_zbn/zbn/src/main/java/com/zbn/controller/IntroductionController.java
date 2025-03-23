@@ -1,48 +1,38 @@
 package com.zbn.controller;
 
-import cn.hutool.poi.excel.ExcelReader;
-import cn.hutool.poi.excel.ExcelUtil;
-import cn.hutool.poi.excel.ExcelWriter;
 import com.github.pagehelper.PageInfo;
 import com.zbn.common.Result;
-import com.zbn.entity.Notice;
-import com.zbn.service.NoticeService;
+import com.zbn.entity.Introduction;
+import com.zbn.service.IntroductionService;
 import jakarta.annotation.Resource;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notice")
-public class NoticeController {
+@RequestMapping("/introduction")
+public class IntroductionController {
     @Resource
-    NoticeService noticeService;
+    IntroductionService introductionService;
 
-    @GetMapping("/selectAll")   //http://ip:port/notice//selectAll
-    public Result selectAll(Notice notice) {
-        List<Notice> noticeList = noticeService.selectAll(notice);
-        //-->NoticeService -->NoticeMapper -->NoticeMapper.xml
-        return Result.success(noticeList);
+    @GetMapping("/selectAll")
+    public Result selectAll(Introduction introduction) {
+        List<Introduction> introductionList = introductionService.selectAll(introduction);
+        return Result.success(introductionList);
     }
     @PostMapping("/add")
-    public Result add(@RequestBody Notice notice) {
-        noticeService.add(notice);
+    public Result add(@RequestBody Introduction introduction) {
+        introductionService.add(introduction);
         return Result.success();
     }
     @PutMapping("/update")
-    public Result update(@RequestBody Notice notice) {
-        noticeService.update(notice);
+    public Result update(@RequestBody Introduction introduction) {
+        introductionService.update(introduction);
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")//接受传来的路劲参数
     public Result delete(@PathVariable Integer id) {
-        noticeService.deleteByid(id);
+        introductionService.deleteByid(id);
         return Result.success();
     }
 
@@ -50,10 +40,10 @@ public class NoticeController {
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,
-                             Notice notice) {
+                             Introduction introduction) {
 
 
-        PageInfo<Notice> pageInfo = noticeService.selectPage(pageNum, pageSize, notice);
+        PageInfo<Introduction> pageInfo = introductionService.selectPage(pageNum, pageSize, introduction);
         return Result.success(pageInfo);
     }
 }

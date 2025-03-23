@@ -6,7 +6,10 @@ public class Introduction {
     private String time;
     private Integer id;
     private String img;
-
+    private Integer categoryId;
+    private String categoryTitle;
+    private Integer userId;
+    private String userName;
     public String getTitle() {
         return title;
     }
@@ -45,5 +48,38 @@ public class Introduction {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryTitle() {
+        return categoryTitle;
+    }
+
+    public void setCategoryTitle(String categoryTitle) {
+        this.categoryTitle = categoryTitle;
+    }
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

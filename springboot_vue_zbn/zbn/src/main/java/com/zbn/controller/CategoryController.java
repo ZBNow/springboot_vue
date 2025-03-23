@@ -1,48 +1,39 @@
 package com.zbn.controller;
 
-import cn.hutool.poi.excel.ExcelReader;
-import cn.hutool.poi.excel.ExcelUtil;
-import cn.hutool.poi.excel.ExcelWriter;
 import com.github.pagehelper.PageInfo;
 import com.zbn.common.Result;
-import com.zbn.entity.Notice;
-import com.zbn.service.NoticeService;
+import com.zbn.entity.Category;
+import com.zbn.service.CategoryService;
 import jakarta.annotation.Resource;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notice")
-public class NoticeController {
+@RequestMapping("/category")
+public class CategoryController {
     @Resource
-    NoticeService noticeService;
+    CategoryService categoryService;
 
-    @GetMapping("/selectAll")   //http://ip:port/notice//selectAll
-    public Result selectAll(Notice notice) {
-        List<Notice> noticeList = noticeService.selectAll(notice);
-        //-->NoticeService -->NoticeMapper -->NoticeMapper.xml
-        return Result.success(noticeList);
+    @GetMapping("/selectAll")   //http://ip:port/category//selectAll
+    public Result selectAll(Category category) {
+        List<Category> categoryList = categoryService.selectAll(category);
+        //-->CategoryService -->CategoryMapper -->CategoryMapper.xml
+        return Result.success(categoryList);
     }
     @PostMapping("/add")
-    public Result add(@RequestBody Notice notice) {
-        noticeService.add(notice);
+    public Result add(@RequestBody Category category) {
+        categoryService.add(category);
         return Result.success();
     }
     @PutMapping("/update")
-    public Result update(@RequestBody Notice notice) {
-        noticeService.update(notice);
+    public Result update(@RequestBody Category category) {
+        categoryService.update(category);
         return Result.success();
     }
     @DeleteMapping("/delete/{id}")//接受传来的路劲参数
     public Result delete(@PathVariable Integer id) {
-        noticeService.deleteByid(id);
+        categoryService.deleteByid(id);
         return Result.success();
     }
 
@@ -50,10 +41,10 @@ public class NoticeController {
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,
-                             Notice notice) {
+                             Category category) {
 
 
-        PageInfo<Notice> pageInfo = noticeService.selectPage(pageNum, pageSize, notice);
+        PageInfo<Category> pageInfo = categoryService.selectPage(pageNum, pageSize, category);
         return Result.success(pageInfo);
     }
 }

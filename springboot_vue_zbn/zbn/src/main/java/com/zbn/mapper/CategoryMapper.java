@@ -1,20 +1,23 @@
 package com.zbn.mapper;
 
-import com.zbn.entity.Notice;
+import com.github.pagehelper.ISelect;
+import com.zbn.entity.Category;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-public interface NoticeMapper {
+public interface CategoryMapper {
 
-    List<Notice> selectAll(Notice notice);
+    List<Category> selectAll(Category category);
 
-    void insert(Notice notice);
+    void insert(Category category);
 
-    void updateByid(Notice notice);
+    void updateByid(Category category);
 
-    @Delete("delete from `notice` where id = #{id}")
+    @Delete("delete from `category` where id = #{id}")
     void deleteByid(Integer id);
 
+    @Select("Select * from `category` where id = #{id}")
+    Category selectByid(Integer Id);
 }

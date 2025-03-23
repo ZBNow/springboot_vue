@@ -8,7 +8,6 @@
 
     <div class="card" style="margin-bottom: 5px"  >
       <el-button type="primary" @click="handleAdd" >新增</el-button>
-
     </div>
     <!--数据显示区域-->
     <div class="card" style="margin-bottom: 5px">

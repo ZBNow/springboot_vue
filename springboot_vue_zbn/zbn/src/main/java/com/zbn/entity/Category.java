@@ -1,9 +1,11 @@
 package com.zbn.entity;
 
-public class Notice {
+/**
+ *攻略分类信息
+
+ */
+public class Category {
     private String title;
-    private String content;
-    private String time;
     private Integer id;
 
     public String getTitle() {
@@ -12,22 +14,6 @@ public class Notice {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public Integer getId() {

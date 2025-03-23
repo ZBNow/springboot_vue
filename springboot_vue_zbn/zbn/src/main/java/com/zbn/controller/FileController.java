@@ -1,6 +1,8 @@
 package com.zbn.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Dict;
 import com.zbn.common.Result;
 import com.zbn.exception.CustomerException;
 import jakarta.servlet.ServletOutputStream;
@@ -10,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -28,10 +32,10 @@ public class FileController {
             FileUtil.mkdir(filepath);
         }
         byte[] bytes = file.getBytes();
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();//设置文件名
         //写入文件
         FileUtil.writeBytes(bytes, filepath + fileName);
-        String url = "http://localhost:9999/files/download/" + fileName;
+        String url = "http://localhost:9999/files/download/" + fileName;// 设置返回的下载图片地址
         return Result.success(url);
     }
 
@@ -55,5 +59,31 @@ public class FileController {
         os.write(bytes);
         os.flush();
         os.close();
+    }
+    /**
+     * 实现富文本编辑器的图片上传
+     */
+    @PostMapping("/wang/upload")//实现wangEditor文本图片上传
+    public Map<String, Object> wangEditorUpload(MultipartFile file) throws Exception {
+        //生成唯一文件名
+        String flag = System.currentTimeMillis() + "";
+        String fileName = file.getOriginalFilename();
+        try {
+            String filePath = System.getProperty("user.dir") + "/springboot_vue_zbn/files/";//服务器存储路径
+            //保存文件
+            FileUtil.writeBytes(file.getBytes(), filePath + flag + "-" + fileName);
+            System.out.println(fileName + "上传成功");
+            Thread.sleep(1L);
+
+        } catch (Exception e) {
+            System.out.println("上传失败");
+            throw new RuntimeException(e);
+        }
+        String http = "http://localhost:9999/files/download/";
+
+        Map<String, Object> resMap = new HashMap<>();
+        resMap.put("errno", 0);
+        resMap.put("data", CollUtil.newArrayList(Dict.create().set("url", http + flag + "-" + fileName)));
+        return resMap;
     }
 }

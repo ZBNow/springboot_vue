@@ -36,7 +36,7 @@
         <div style="display: flex;">
             <!-- 侧边菜单 -->
             <div style="width: 240px;">
-                <el-menu router :default-active="router.currentRoute.value.path" :default-openeds="['1','2']" style="min-height: calc(100vh - 60px);">
+                <el-menu router :default-active="router.currentRoute.value.path" :default-openeds="['1','2']" style="min-height: calc(113vh - 60px);">
                     
                     <el-menu-item index="/manager/home">
                         <el-icon><House /></el-icon>
@@ -48,15 +48,20 @@
                       <span>信息管理</span>
                     </template>
                     <el-menu-item index="/manager/notice">系统公告</el-menu-item>
+                    <el-menu-item index="/manager/introduction">旅游攻略</el-menu-item>
+                    <el-menu-item index="/manager/category">攻略分类</el-menu-item>
+
                   </el-sub-menu>
-                    <el-sub-menu index="2"  v-if="data.user.role === 'ADMIN'">
+                  <el-sub-menu index="2" v-if="data.user.role ==='ADMIN' ">
+
+
                         <template #title>
                             <el-icon><Location /></el-icon>
                             <span>用户管理</span>
                         </template>
                         <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
                         <el-menu-item index="/manager/user">用户信息</el-menu-item>
-                    </el-sub-menu>
+                  </el-sub-menu>
 
                 </el-menu>
             </div>
