@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login","/register","/files/download/**","/files/upload/**");
+                .excludePathPatterns("/login","/register","/files/download/**","/files/upload/**","/introduction/selectAll");
     }
 
     @Bean

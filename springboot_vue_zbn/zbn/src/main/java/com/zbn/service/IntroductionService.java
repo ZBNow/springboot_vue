@@ -2,6 +2,7 @@ package com.zbn.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.http.HtmlUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zbn.entity.Account;
@@ -17,6 +18,7 @@ import jakarta.annotation.Resource;
 import org.apache.el.parser.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -38,7 +40,11 @@ public class IntroductionService {
     }
 
     public List<Introduction> selectAll(Introduction introduction) {
-        return introductionMapper.selectAll(introduction);
+        List<Introduction> introductions = introductionMapper.selectAll(introduction);
+        for (Introduction dbIntroduction : introductions) {
+            dbIntroduction.setDescription(HtmlUtil.cleanHtmlTag(dbIntroduction.getContent()));
+        }
+        return introductions;
     }
 
     public void update(Introduction introduction) {
@@ -84,6 +90,24 @@ public class IntroductionService {
         return PageInfo.of(list);
     }
 
+
+    public Introduction selectByid(Integer id) {
+        Introduction introduction1 = introductionMapper.selectByid(id);
+        Integer categoryId = introduction1.getCategoryId();
+            Integer userId = introduction1.getUserId();
+            //通过 categoryId从表里查出对应的title
+            Category category = categoryMapper.selectByid(categoryId);
+            User user = userMapper.selectByid(userId.toString());
+            if(ObjectUtil.isNotEmpty(category)){
+                // 把分类的title 复值给categoryTitle
+                introduction1.setCategoryTitle(category.getTitle());
+            }
+            if(ObjectUtil.isNotEmpty(user)){
+                introduction1.setUserName(user.getName());
+                introduction1.setUserAvatar(user.getAvatar());
+            }
+            return introduction1;
+    }
 
 }
 

@@ -55,8 +55,11 @@ const handleLogin = () => {
         //存储用户消息到浏览器中
         localStorage.setItem("code_user", JSON.stringify(res.data || {}))
         ElMessage.success("登入成功");
-        router.push("/manager/home");
-
+        if("USER" === res.data.role) {
+          location.href = '/front/home'
+        } else {
+          router.push('/manager/home')
+        }
       } else {
         ElMessage.error(res.msg)
       }

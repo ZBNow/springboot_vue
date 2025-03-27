@@ -5,13 +5,13 @@
       <el-button type="primary" @click="load">查 询</el-button>
       <el-button @click="reset">重 置</el-button>
     </div>
-    <div class="card" style="margin-bottom: 5px" v-if="data.user.role === 'USER'">
+    <div class="card" style="margin-bottom: 5px">
       <el-button type="primary" @click="handleAdd">新增</el-button>
     </div>
 <!--    表格数据-->
     <div class="card" style="margin-bottom: 5px">
       <el-table :data="data.tableData" style="width: 100%" :header-cell-style="{color: '#333',fontSize: '17px', backgroundColor: '#eaf4ff'}">
-        <el-table-column label="头像" width="100px">
+        <el-table-column label="图片" width="100px">
           <template #default="scope">
             <el-image v-if="scope.row.img" :src="scope.row.img" :preview-src-list="[scope.row.img]" :preview-teleported="true"
                       style="width: 60px; height: 50px;border-radius: 5px; display: block"/>

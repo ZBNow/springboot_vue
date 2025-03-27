@@ -50,6 +50,10 @@
                     <el-menu-item index="/manager/notice">系统公告</el-menu-item>
                     <el-menu-item index="/manager/introduction">旅游攻略</el-menu-item>
                     <el-menu-item index="/manager/category">攻略分类</el-menu-item>
+                    <el-menu-item index="/manager/apply">请假申请</el-menu-item>
+                    <el-menu-item index="/manager/book">图书借阅</el-menu-item>
+                    <el-menu-item index="/manager/borrow">借阅记录</el-menu-item>
+
 
                   </el-sub-menu>
                   <el-sub-menu index="2" v-if="data.user.role ==='ADMIN' ">
@@ -101,49 +105,51 @@ const updateUser = () => {
 }
 
 </script>
-<style>
-.el-menu{
-    background-color: #3c3c3c;
-    border: none;
+<style scoped>
+/* 深度作用选择器（Vue 3）*/
+::v-deep(.el-menu) {
+  background-color: #3c3c3c;
+  border: none;
 }
 
-.el-sub-menu__title {
-     color: #ddd;
-     height: 50px;
-
+::v-deep(.el-sub-menu__title) {
+  color: #ddd;
+  height: 50px;
 }
-.el-sub-menu__title:hover {
-    background-color:  #3c3c3c; /* 透明背景 */
-    color: #ddd !important; /* 保持原色 */
-}
-.el-sub-menu__title .is-active{
-  background-color:  #3c3c3c !important; /* 透明背景 */
+::v-deep(.el-sub-menu__title:hover) {
+  background-color: #3c3c3c;
   color: #ddd !important;
 }
-.el-menu-item {
-    height: 50px;
-    color: #ddd;
- }
-.el-menu .is-active{
-    background-color: #537bee;
-    color: #fff;
+::v-deep(.el-sub-menu__title .is-active) {
+  background-color: #3c3c3c !important;
+  color: #ddd !important;
 }
 
-.el-menu-item:not(.is-active):hover {
-    background-color: #7a9fff;
-    color: #333;
+::v-deep(.el-menu-item) {
+  height: 50px;
+  color: #ddd;
 }
-.el-tooltip__trigger {
-    outline: none;
+::v-deep(.el-menu .is-active) {
+  background-color: #537bee;
+  color: #fff;
 }
-.el-dropdown {
-    cursor: pointer;
+
+::v-deep(.el-menu-item:not(.is-active):hover) {
+  background-color: #7a9fff;
+  color: #333;
 }
-.el-menu--inline .el-menu-item {
-    padding-left: 48px !important;
+::v-deep(.el-tooltip__trigger) {
+  outline: none;
 }
-.el-sub-menu.is-active .el-sub-menu__title {
+::v-deep(.el-dropdown) {
+  cursor: pointer;
+}
+::v-deep(.el-menu--inline .el-menu-item) {
+  padding-left: 48px !important;
+}
+::v-deep(.el-sub-menu.is-active .el-sub-menu__title) {
   background-color: transparent !important;
   color: #ddd !important;
 }
 </style>
+

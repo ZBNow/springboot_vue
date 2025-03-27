@@ -9,7 +9,7 @@
     </update>
 
     <select id="selectAll" resultType="com.zbn.entity.Introduction">
-        select introduction.*, category.title as categoryTitle, user.name as userName from `introduction`
+        select introduction.*, category.title as categoryTitle, user.name as userName, user.avatar as userAvatar from `introduction`
         left join category on introduction.category_id = category.id
         left join user on introduction.user_id = user.id
         <where><!--判断传入的值是否为null，若是null则跳过下面语句-->

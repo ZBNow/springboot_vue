@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zbn.mapper.BookMapper">
+    <update id="updateByid">
+        update `book` set img = #{img}, name = #{name}, price = #{price}, author = #{author}, num = #{num}
+        where id = #{id}
+    </update>
+
+    <select id="selectAll" resultType="com.zbn.entity.Book">
+        select book.*, book.id as bookId from `book`
+        <where><!--判断传入的值是否为null，若是null则跳过下面语句-->
+            <if test="name != null and name != ''">and name like concat('%', #{name}, '%')</if>
+        </where>
+        order by id desc
+    </select>
+
+    <insert id="insert">
+        insert into `book` (img, name, price, author, num)
+        values (#{img}, #{name}, #{price}, #{author}, #{num})
+    </insert>
+
+</mapper>

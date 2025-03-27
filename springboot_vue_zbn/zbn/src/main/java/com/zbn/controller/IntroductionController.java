@@ -35,8 +35,6 @@ public class IntroductionController {
         introductionService.deleteByid(id);
         return Result.success();
     }
-
-
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,
@@ -45,5 +43,13 @@ public class IntroductionController {
 
         PageInfo<Introduction> pageInfo = introductionService.selectPage(pageNum, pageSize, introduction);
         return Result.success(pageInfo);
+    }
+    /**
+     * 根据id查询
+     */
+    @GetMapping("/selectByid/{id}")
+    public Result selectByid(@PathVariable Integer id) {
+        Introduction introduction = introductionService.selectByid(id);
+        return Result.success(introduction);
     }
 }

@@ -16,7 +16,6 @@
         <el-table-column prop="content" label="内容">
           <template v-slot="scope">
             <span v-if="data.user.role === 'USER'">{{ scope.row.content}}</span>
-            <span v-if="data.user.role === 'USER'">您暂无权限查看</span>
           </template>
         </el-table-column>
         <el-table-column prop="time" label="时间"/>
