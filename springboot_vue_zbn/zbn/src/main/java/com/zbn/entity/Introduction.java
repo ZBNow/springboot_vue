@@ -12,6 +12,8 @@ public class Introduction {
     private String userName;
     private  String userAvatar;
     private String description;
+    private String reason;
+    private String status;
     public String getTitle() {
         return title;
     }
@@ -99,5 +101,21 @@ public class Introduction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -33,7 +33,7 @@
       <el-form ref="formRef" :rules="data.rules" label-width="80px" style="padding: 20px 30px 0 0" :model="data.form">
         <el-form-item prop="img" label="图书封面">
           <el-upload
-              action="http://localhost:9999/files/upload"
+              action="http://43.143.94.185:9999/files/upload"
               :headers="{ token: data.user.token }"
               :on-success="handleFileSuccess"
               list-type="picture">

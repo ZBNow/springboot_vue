@@ -64,8 +64,12 @@ const handleRegister = () => {
   formRef.value.validate((valid) => {
     if (valid) {
       request.post("/register", data.form).then(res => {
+        console.log("响应数据:", res); // 打印响应数据
         if (res.code === '200') {
-          ElMessage.success("注册成功");
+          ElMessage.success("注册成功 用户名：" + res.data + "可前往个人中心修改")
+          setTimeout(() => {
+            location.href = '/login'
+          },2000)
         } else {
           ElMessage.error(res.msg);
         }

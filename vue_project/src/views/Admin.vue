@@ -14,7 +14,7 @@
     <el-button type="info" @click="exportData">批量导出</el-button>
     <el-upload
         :show-file-list="false"
-        action="http://localhost:9999/admin/import"
+        :action="$baseUrl + '/admin/import'"
         :on-success="handleImport"
         style="display: inline-block; margin-left: 10px">
        <el-button type="success">批量导入</el-button>
@@ -38,7 +38,7 @@
         </el-form-item>
         <el-form-item prop="avatar" label="头像">
           <el-upload
-              action="http://localhost:9999/files/upload"
+              action="http://43.143.94.185:9999/files/upload"
               :headers="{ token: data.user.token }"
               :on-success="handleFileSuccess"
               list-type="picture">
@@ -229,7 +229,7 @@ const deleteBatch = () => {
 
 }
 const exportData = () => {
-  let url = `http://localhost:9999/admin/export?username=${data.username}&name=${data.name}` + `&token=${data.user.token}`
+  let url = `http://43.143.94.185:9999/admin/export?username=${data.username}&name=${data.name}` + `&token=${data.user.token}`
   console.log(data.username,data.name)
   window.open(url)
 }

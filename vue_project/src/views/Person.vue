@@ -16,7 +16,7 @@
         </el-form-item>
         <el-form-item prop="avatar" label="头像">
           <el-upload
-              action="http://localhost:9999/files/upload"
+              action="http://43.143.94.185:9999/files/upload"
               :headers="{ token: data.user.token }"
               :on-success="handleFileSuccess"
               list-type="picture">
@@ -58,6 +58,8 @@ const update = () => {
       console.log(data.user)
       localStorage.setItem('code_user', JSON.stringify(data.user))
       emit("updateUser")
+    } else {
+      ElMessage.error(res.msg)
     }
   })
 }

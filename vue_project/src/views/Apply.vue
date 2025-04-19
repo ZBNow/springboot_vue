@@ -6,7 +6,7 @@
       <el-button @click="reset">重 置</el-button>
     </div>
     <div class="card" style="margin-bottom: 5px" v-if="'USER' === data.user.role">
-      <el-button type="primary" @click="handleAdd">提交请假申请</el-button>
+      <el-button type="info" @click="handleAdd">发布帖子</el-button>
     </div>
   </div>
 

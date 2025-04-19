@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+
 import com.zbn.entity.User;
 @Service
 //业务代码
@@ -26,7 +28,9 @@ public class UserService {
     @Autowired
     private AdminMapper adminMapper;
 
-    public void add(User user) {
+    public String add(User user) {
+        String randomUsername = "user_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        user.setName(randomUsername);
         User dbUser = userMapper.selectByUsername(user.getUsername());
         if(dbUser != null) {
             throw new CustomerException("账号重复");
@@ -36,6 +40,7 @@ public class UserService {
         }
         user.setRole("USER");
         userMapper.insert(user);
+        return randomUsername;
     }
 
     //查询对应条件的所有数据
@@ -44,6 +49,15 @@ public class UserService {
     }
 
     public void update(User user) {
+        Account account = TokenUtils.getCurrentUser();
+        User dbUser = userMapper.selectByUsername(user.getUsername());
+        int a = 0;
+        if(account.getUsername().equals(dbUser.getUsername())) {
+            a = 1;
+        }
+        if(dbUser != null && a == 0) {
+            throw new CustomerException("账号重复");
+        }
         userMapper.updateByid(user);
     }
 

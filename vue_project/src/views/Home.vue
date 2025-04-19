@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 99%">
     <div class="card" v-if="data.user.role === 'USER'">欢迎来到大郑王朝</div>
     <div v-if="data.user.role ==='USER'" class="card" style="margin-top: 20px; width:50%;" >
       <div style="margin-bottom: 20px; font-size: 20px">系统公告</div>

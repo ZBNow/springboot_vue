@@ -37,8 +37,8 @@ public class WebController {
     }
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
-        userService.add(user);
-        return Result.success();
+        String username =  userService.add(user);
+        return Result.success(username);
     }
     @PostMapping("/updatePassword")
     public Result updatePassword(@RequestBody Account account) {

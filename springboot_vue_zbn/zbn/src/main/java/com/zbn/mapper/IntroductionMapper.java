@@ -19,4 +19,8 @@ public interface IntroductionMapper {
     void deleteByid(Integer id);
     @Select("select * from `introduction` where id = #{id}")
     Introduction selectByid(Integer id);
+
+    List<Introduction> selectAllStatus(Introduction introduction);
+
+    List<Introduction> selectAllCategory(Introduction introduction);
 }

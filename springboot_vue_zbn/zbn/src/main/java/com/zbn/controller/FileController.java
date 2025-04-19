@@ -35,7 +35,7 @@ public class FileController {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();//设置文件名
         //写入文件
         FileUtil.writeBytes(bytes, filepath + fileName);
-        String url = "http://localhost:9999/files/download/" + fileName;// 设置返回的下载图片地址
+        String url = "http://43.143.94.185:9999/files/download/" + fileName;// 设置返回的下载图片地址
         return Result.success(url);
     }
 
@@ -79,7 +79,7 @@ public class FileController {
             System.out.println("上传失败");
             throw new RuntimeException(e);
         }
-        String http = "http://localhost:9999/files/download/";
+        String http = "http://43.143.94.185:9999/files/download/";
 
         Map<String, Object> resMap = new HashMap<>();
         resMap.put("errno", 0);

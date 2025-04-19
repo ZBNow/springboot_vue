@@ -1,9 +1,8 @@
 import axios from "axios";
 import { ElMessage } from "element-plus";
 import router from "@/router/index.js";
-
 const request = axios.create({
-    baseURL: 'http://localhost:9999',
+    baseURL: import.meta.env.VITE_APP_BASEURL,
     timeout: 30000 // 后台接口超时时间
 });
 

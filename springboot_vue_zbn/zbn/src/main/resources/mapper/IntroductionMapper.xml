@@ -4,11 +4,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zbn.mapper.IntroductionMapper">
     <update id="updateByid">
-        update `introduction` set title = #{title}, content = #{content}, time = #{time}, img = #{img}, category_id = #{categoryId}, user_id = #{userId}
-        where id = #{id}
+        update `introduction` set title = #{title}, content = #{content}, time = #{time}, img = #{img}, category_id = #{categoryId}, user_id = #{userId},
+        status = #{status}, reason = #{reason} where id = #{id}
     </update>
 
     <select id="selectAll" resultType="com.zbn.entity.Introduction">
+        select introduction.*, category.title as categoryTitle, user.name as userName, user.avatar as userAvatar from `introduction`
+        left join category on introduction.category_id = category.id
+        left join user on introduction.user_id = user.id
+        <where><!--判断传入的值是否为null，若是null则跳过下面语句-->
+            and introduction.status = "审核通过"
+            <if test="title != null and title != ''">and introduction.title like concat('%', #{title}, '%')</if>
+            <if test="userId != null">and introduction.user_id = #{userId}</if>
+            <if test="categoryTitle != null and categoryTitle != '全部'">and #{categoryTitle} = category.title</if>
+        </where>
+        order by id desc
+    </select>
+    <select id="selectAllStatus" resultType="com.zbn.entity.Introduction">
         select introduction.*, category.title as categoryTitle, user.name as userName, user.avatar as userAvatar from `introduction`
         left join category on introduction.category_id = category.id
         left join user on introduction.user_id = user.id
@@ -17,6 +29,9 @@
             <if test="userId != null">and introduction.user_id = #{userId}</if>
         </where>
         order by id desc
+    </select>
+    <select id="selectAllCategory" resultType="com.zbn.entity.Introduction">
+        select title as categoryTitle from category
     </select>
 
     <insert id="insert">

@@ -36,18 +36,25 @@ public class IntroductionService {
         Account currentUser = TokenUtils.getCurrentUser();
         introduction.setUserId(currentUser.getId());
         introduction.setTime(DateUtil.now());
+        introduction.setStatus("待审核");
         introductionMapper.insert(introduction);
     }
 
     public List<Introduction> selectAll(Introduction introduction) {
         List<Introduction> introductions = introductionMapper.selectAll(introduction);
         for (Introduction dbIntroduction : introductions) {
-            dbIntroduction.setDescription(HtmlUtil.cleanHtmlTag(dbIntroduction.getContent()));
+            String content = dbIntroduction.getContent();
+            String cleanDescription = content != null ? HtmlUtil.cleanHtmlTag(content) : "";
+            dbIntroduction.setDescription(cleanDescription);
         }
         return introductions;
     }
 
     public void update(Introduction introduction) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if(currentUser.getRole().equals("USER")){
+            introduction.setStatus("待审核");
+        }
         introductionMapper.updateByid(introduction);
     }
 
@@ -94,20 +101,42 @@ public class IntroductionService {
     public Introduction selectByid(Integer id) {
         Introduction introduction1 = introductionMapper.selectByid(id);
         Integer categoryId = introduction1.getCategoryId();
-            Integer userId = introduction1.getUserId();
-            //通过 categoryId从表里查出对应的title
-            Category category = categoryMapper.selectByid(categoryId);
-            User user = userMapper.selectByid(userId.toString());
-            if(ObjectUtil.isNotEmpty(category)){
-                // 把分类的title 复值给categoryTitle
-                introduction1.setCategoryTitle(category.getTitle());
-            }
-            if(ObjectUtil.isNotEmpty(user)){
-                introduction1.setUserName(user.getName());
-                introduction1.setUserAvatar(user.getAvatar());
-            }
-            return introduction1;
+        Integer userId = introduction1.getUserId();
+        //通过 categoryId从表里查出对应的title
+        Category category = categoryMapper.selectByid(categoryId);
+        User user = userMapper.selectByid(userId.toString());
+        if (ObjectUtil.isNotEmpty(category)) {
+            // 把分类的title 复值给categoryTitle
+            introduction1.setCategoryTitle(category.getTitle());
+        }
+        if (ObjectUtil.isNotEmpty(user)) {
+            introduction1.setUserName(user.getName());
+            introduction1.setUserAvatar(user.getAvatar());
+        }
+        return introduction1;
     }
 
+
+
+    public List<Introduction> selectAllStatus(Introduction introduction) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if("USER".equals(currentUser.getRole())) {
+            introduction.setUserId(currentUser.getId());
+        }
+        List<Introduction> introductions = introductionMapper.selectAllStatus(introduction);
+        for (Introduction dbIntroduction : introductions) {
+            String content = dbIntroduction.getContent();
+            String cleanDescription = content != null ? HtmlUtil.cleanHtmlTag(content) : "";
+            dbIntroduction.setDescription(cleanDescription);
+        }
+
+        return introductions;
+    }
+
+    public List<Introduction> selectCategory(Introduction introduction) {
+        List<Introduction> introductions = introductionMapper.selectAllCategory(introduction);
+
+        return introductions;
+    }
 }
 

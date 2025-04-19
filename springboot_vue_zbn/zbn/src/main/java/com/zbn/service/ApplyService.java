@@ -26,6 +26,7 @@ public class ApplyService {
         apply.setUserId(currentUser.getId());
         apply.setStatus("待审核");
         applyMapper.insert(apply);
+         
     }
 
     public List<Apply> selectAll(Apply apply) {

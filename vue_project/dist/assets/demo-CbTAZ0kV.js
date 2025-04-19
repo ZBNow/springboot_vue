@@ -1,0 +1,5 @@
+import{_ as m,c as d,a as r,F as u,r as _,b as g,d as h,o as l,n as v}from"./index-0MHbT1SH.js";const p={setup(){let n=g(null);const t=800,c=900,a=()=>{const o=["#ffffff","#c9e4ff","#e6e6fa","#b0c4de"];return o[Math.floor(Math.random()*o.length)]};return h(()=>{Array.from(n.value.children).forEach(e=>{let s=.2+Math.random()*1,i=c+Math.random()*300;e.style.transformOrigin=`0 0 ${i}px`,e.style.transform=`
+        translate3d(0,0,-${i}px)
+        rotateY(${Math.random()*360}deg)
+        rotateX(${Math.random()*-50}deg)
+        scale(${s},${s})`})}),{starsRef:n,starsCount:t,navigateTo:()=>{window.location.href="/front/home"},getRandomStarColor:a}}},b={class:"body"},y={class:"stars",ref:"starsRef"},M={class:"content"};function x(n,t,c,a,f,o){return l(),d("div",b,[r("div",y,[(l(!0),d(u,null,_(a.starsCount,(e,s)=>(l(),d("div",{class:"star",key:s,style:v({background:a.getRandomStarColor()})},null,4))),128))],512),r("div",M,[t[1]||(t[1]=r("div",{class:"text"},"星辰大海 不是终点 而是心之所向",-1)),r("button",{class:"enter-btn",onClick:t[0]||(t[0]=(...e)=>a.navigateTo&&a.navigateTo(...e))},"Enter")])])}const k=m(p,[["render",x],["__scopeId","data-v-71c81b3a"]]);export{k as default};

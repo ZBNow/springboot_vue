@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <div style="width: 350px; height: 350px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1 ); background-color: #ffffff; border-radius: 5px; padding: 20px 20px;">
+    <div style="width: 350px; height: 320px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1 ); background-color: #ffffff; border-radius: 5px; padding: 20px 20px;">
       <el-form ref="formRef" :model="data.form" :rules="data.rules">
         <div style="text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 30px;">欢 迎 登 入</div>
         <el-form-item prop="username">
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import request from "@/utils/request.js";
 import {ElMessage} from "element-plus";
 import router from "@/router/index.js";

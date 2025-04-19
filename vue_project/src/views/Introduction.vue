@@ -36,11 +36,11 @@
     </div>
 <!--   弹窗-->
 
-      <el-dialog v-model="data.formVisible" title="攻略信息" width="60%" destroy-on-close>
+      <el-dialog v-model="data.formVisible" title="攻略信息" width="60%" destroy-on-close top="20px">
         <el-form label-width="80px" style="padding: 20px 30px 0 0;" :model="data.form">
           <el-form-item prop="avatar" label="攻略图片">
             <el-upload
-                action="http://localhost:9999/files/upload"
+                action="http://43.143.94.185:9999/files/upload"
                 :headers="{ token: data.user.token }"
                 :on-success="handleFileSuccess"
                 list-type="picture">
@@ -48,7 +48,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item label="攻略标题" prop="title" >
-            <el-input placeholder="请输入攻略标题" v-model="data.form.title" autocomplete="off" />
+            <el-input placeholder="请输入攻略标题" v-model="data.form.title" autocomplete="off" style="width:30%"/>
           </el-form-item>
           <el-form-item label="攻略标题" prop="title">
             <el-select
@@ -70,7 +70,7 @@
                 :editor="editorRef"
                 :mode="mode"/>
               <Editor
-                style="height: 250px; overflow: hidden"
+                style="height: 350px; overflow: hidden"
                 v-model="data.form.content"
                 :mode="mode"
                 :defaultConfig="editorConfig"
@@ -125,7 +125,7 @@ editorConfig.MENU_CONF['uploadImage'] = {
   headers: {
     token: data.user.token,
   },
-  server: 'http://localhost:9999/files/wang/upload', // 服务端图片上传
+  server: 'http://43.143.94.185:9999/files/wang/upload', // 服务端图片上传
   fieldName: 'file' // 服务端图片上传接口参数
 };
 
